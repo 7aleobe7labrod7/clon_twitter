@@ -1,0 +1,30 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: clon_twitter_development
+  username: postgres
+  password: 9999
+  host: localhost
+  port: 5432
+
+test:
+  <<: *default
+  database: clon_twitter_test
+  username: postgres
+  password: 9999
+  host: localhost
+  port: 5432
+
+production:
+  <<: *default
+  database: clon_twitter_production
+  username: postgres
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
